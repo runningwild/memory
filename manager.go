@@ -20,14 +20,14 @@ const smallestBlockSize = 1024
 // exists.  If you call GetBlock() then it should be followed by a FreeBlock()
 //when you are done with it.
 type Manager struct {
-  mutex  sync.Mutex
+  mutex sync.Mutex
 
   // blocks[size] = a slice of blocks of length 2^(10+size)
   blocks [][][]byte
 
   // Map of used blocks.  The key is the address of the first byte in the
   // block.
-  used   map[*byte]bool
+  used map[*byte]bool
 }
 
 func NewManager() *Manager {
@@ -108,6 +108,7 @@ func (m *Manager) TotalAllocations() string {
 }
 
 var manager *Manager
+
 func init() {
   manager = NewManager()
 }
